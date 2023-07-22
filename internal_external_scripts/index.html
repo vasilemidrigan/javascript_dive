@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>some text</p>
+
+    <script>
+      console.log("This script is read first");
+    </script>
+
+    <!--
+
+        The scripts are read from up to down order.
+
+        --------------- 
+        Internal script 
+        --------------- 
+        An internal script should be between body tags, 
+        if we will put it everywhere else, we will see 
+        that it appears in the head or in the body, 
+        depending on which part of the document it
+        placed.
+
+        Usually internal scripts are used when we have
+        simple files. 
+    
+    -->
+    <script>
+      console.log("This script is read second");
+    </script>
+
+    <!--
+        ---------------
+        External script
+        ---------------
+    
+        First script below has an absolute path, the second
+        one has a relative path.
+        
+        The benefit of using external scripts, is that the 
+        browser will download it and save it into its cache, 
+        then other pages that references to this script, will
+        take it from the cache, instead of downloading it
+        again, that makes the hole process so much faster. 
+
+        If we have a script which has a src, and we also
+        have some code between script tags, this code will be
+        ignored, as the script is looking for the referenced 
+        file in the src mentioned in the src attribute. 
+
+    -->
+
+    <script src="/hello_world/script.js"></script>
+    <script src="script.js"></script>
+
+    <script src="script.js">
+      console.log("This code will note execute!")
+    </script>
+
+    <p>some text</p>
+  </body>
+</html>
