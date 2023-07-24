@@ -59,6 +59,16 @@
   The syntax of a function declaration. We can also create functions
   without parameters. (*)
 
+  When we declare a function, the function is saved into a variable 
+  with the name of the function. So function hi() {}, creates a 
+  function and saves it into a variables called hi. 
+
+  As a rule of thumb, function declaration are preferable when 
+  chosing the option between the first and function expression, 
+  this is because it is accessible anywhere in the code, it is
+  more readble. But if there is a special case in which function
+  declaration doesn't fit, then we should look for function
+  expression. 
 */
 
 // *
