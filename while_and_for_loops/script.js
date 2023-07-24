@@ -6,9 +6,7 @@
   Loops are a way to reapeat code multiple times.
 
   A single execution is called an iteration. 
-*/
 
-/* 
   ----------------
   The 'while' loop
   ----------------
@@ -150,6 +148,7 @@ for (let p = 0; ; ++p) {
   The combination of an infinite loop and break is great for situations when 
   we need to check the condition during the loop iteration, not on start or 
   in the end. 
+
   
 */
 
@@ -177,6 +176,12 @@ console.log(diff);
   isn't better for readability, especially if inside the if statement
   we have more lines of code. (**)
 
+  ! We cannot use break and continue keywords with the ternary operator ?,
+  as it is expecting an expression, which break and continue aren't. So
+  this will give a syntax error. (***)
+
+  A continue is only possible from inside a loop. 
+
 */
 
 // *
@@ -189,5 +194,71 @@ for (let i = 0; i < 11; i++) {
 for (let i = 0; i < 11; i++) {
   if (i % 2) {
     console.log(i);
+  }
+}
+
+// ***
+let k = 3;
+while (k) {
+  // (k) ? console.log(k) : break; // Error (! use if statement instead)
+  if (k) {
+    console.log(k);
+  } else {
+    break;
+  }
+  k--;
+}
+
+/* 
+  -------------------------
+  Labels for break/continue
+  -------------------------
+  
+  Sometimes we need to break out from multiple nested loops, using break
+  will stop the current, not the outer loop for example. In this example, 
+  the inner loop will break as soon as the value of j is equal to 1, but
+  it will break only the inner loop, so the outer loop will continue to
+  iterate, calling the inner loop again.(*)
+
+  To prevent this behaviour and break all loops, we have to use labels.
+  So in this case, we break the outer loop by referencing to it with 
+  a label name, which can be on the same line with the loop or on top 
+  of it.(**)
+
+  We can also use continue directive with label, so the execution of 
+  the inner loop stops and it will continue from the outer loop.(***)
+
+  We can only use labels with break and continue. And we should nest 
+  the last two inside the label block, otherwise it will not work. 
+
+*/
+
+// *
+for (let i = 0; i < 5; i++) {
+  for (let j = 0; j < 3; j++) {
+    console.log(j);
+    if (j == 1) {
+      break;
+    }
+  }
+}
+
+// **
+outer: for (let i = 0; i < 5; i++) {
+  for (let j = 0; j < 3; j++) {
+    console.log(j);
+    if (j == 1) {
+      break outer;
+    }
+  }
+}
+
+// ***
+outer: for (let i = 0; i < 5; i++) {
+  for (let j = 0; j < 3; j++) {
+    console.log(j);
+    if (j == 1) {
+      continue outer;
+    }
   }
 }
