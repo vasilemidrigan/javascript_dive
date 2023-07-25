@@ -84,7 +84,23 @@
   In order to test a more complex function, we can generate it blocks by
   using loops. (***)
 
+  We can nest describes ones into anothers. 
 
+  before/after and beforeEach/afterEach can be used to setup functions
+  that executes before and after running tests, and before and after
+  each it block.
+
+  To indicate a mathematical error, JS functions usually return NaN. 
+  Let's implement that for invalid values of n. (#) Now after writing
+  our tests, they fail, that is how BDD works, first write tests, then
+  implementations for them. Now let's write implementation. (##)
+
+  So in BDD, test goes first, then implementation, and at the end, we 
+  have both, the spec and the code. 
+
+  A well-tested code has a better architecture, because to write tests,
+  the code should be organized, in such a way that every function has
+  a clear task, this means, good architecture from the beggining. 
 */
 
 //*
@@ -113,14 +129,25 @@ describe("pow", function () {
 
 // ***
 describe("toPower", function () {
-  function makeTest(x) {
-    let expected = x * x * x;
-    it(`${x} in the power 3 is ${expected}`, function () {
-      assert.equal(toPower(x, 3), expected);
-    });
-  }
+  describe("raises x to the power 3", function () {
+    function makeTest(x) {
+      let expected = x * x * x;
+      it(`${x} in the power 3 is ${expected}`, function () {
+        assert.equal(toPower(x, 3), expected);
+      });
+    }
 
-  for (let x = 1; x <= 5; x++) {
-    makeTest(x);
-  }
+    for (let x = 1; x <= 5; x++) {
+      makeTest(x);
+    }
+  });
+  // #
+  describe("checking for NaN", function () {
+    it("for negative n the result is NaN", function () {
+      assert.isNaN(toPower(2, -1));
+    });
+    it("for non-integer n, the result is NaN", function () {
+      assert.isNaN(toPower(2, 1.5));
+    });
+  });
 });
