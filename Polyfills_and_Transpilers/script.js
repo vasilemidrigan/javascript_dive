@@ -34,9 +34,6 @@
   fills in the gap and add missing implementations. For example we can
   miss Math.trunc(), so there is no need to transpile anything, we just 
   need to declare the missing function. 
-
-  
-
 */
 
 // *
