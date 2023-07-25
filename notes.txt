@@ -1,0 +1,8 @@
+Some important moments in web development:
+
+- clean code 
+- best practices
+- conventions, coding style
+- debugging
+
+
