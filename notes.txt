@@ -5,4 +5,29 @@ Some important moments in web development:
 - conventions, coding style
 - debugging
 
+  -----
+  TO DO: 
+  -----
+  - build some small projects by implementing the stuff from 
+    Fundamentals introduction
+
+- BDD (Behaviour Drive Development)
+  Write tests, Then write implementations.
+  Then write another tests, and write another implementations.
+  Iterate. 
+
+- Transpiler: translates a modern code to older code, in order to 
+  be understood by outdated engines.
+- Polyfill: a script that updates/add new function, filling the gap 
+  or missin implementations. 
+
+  -----
+  TO DO: 
+  -----
+  - study some not yet implemented language features, and try to 
+    implement them by using transpilers and polyfills. 
+  - setup a code build system based on webpack with babel-loader 
+    plugin.
+
+
 
