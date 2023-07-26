@@ -38,6 +38,8 @@
   The capital letter first, is a common agreement that the function is run with
   new operator. We can do the same without capitall letter, but it is not
   recommended at all. (###) 
+
+  JavaScript provides constructor function for many built-in language objects
 */
 
 // *
@@ -129,6 +131,9 @@ console.log(mamaliga);
   object is returned instead of this, if the return is called with a 
   primitive, then it is ignored. (*)
 
+  One more thing: we can omit parentheses, but it is not considered a good
+  style.
+
 */
 
 // *
@@ -154,3 +159,28 @@ function Currency1(state, symbol) {
 let euro = new Currency1("Ireland", "€");
 
 console.log(euro);
+
+/* 
+  ----------------------
+  Methods in constructor 
+  ----------------------
+
+  Using constructor functions give us a lot of flexibility, we can use
+  parameters to define how to construct the object. Beside properties,
+  we can also define methods as well. (*)
+
+  To create more complex objects, there is a more advanced syntax called
+  classes, which we'll cover later. 
+*/
+function Currency2(state, symbol) {
+  this.state = state;
+  this.symbol = symbol;
+  this.name = "pound sterling";
+
+  this.logCurrency = function () {
+    console.log(`The currency of ${this.state} is ${this.name} ${this.symbol}`);
+  };
+}
+let poundSterling = new Currency2("United Kingdom", "£");
+
+poundSterling.logCurrency();
