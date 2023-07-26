@@ -45,3 +45,9 @@ OOP is a big thing, an interesting science of its own. How to choose the right e
 research the topic, understand it better. 
 
 review task 1 from 'this'
+
+----------------------------
+constructor and new operator
+----------------------------
+
+review task 1
