@@ -51,3 +51,9 @@ constructor and new operator
 ----------------------------
 
 review task 1
+
+-------
+Symbols
+-------
+
+to finish
