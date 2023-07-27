@@ -98,7 +98,8 @@ console.log(number.toString(36));
   If we want to round a floating point nr 3.4567 to 2 digits after the 
   floating point, we can:
   1. Multiply and divide: multiply by 100, call the rounding function, and
-  then divide it back(**)
+  then divide it back by 100(**) If 3 digits after . then by 1000 and so 
+  on and so fourth
   2. We can use .toFixed(n), which rounds the number to n digits after the 
   point and returns it as a string representation. (***) It round the last
   digit after the point. And we need to convert it into a number if this 
