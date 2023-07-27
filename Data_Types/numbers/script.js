@@ -158,8 +158,7 @@ let toNr = +roundV; // typeof number
   We can see the impression by opening more digits after the zero. (***)
   
   The most reliable method to work around the precision loose problem,
-  it to use the method toFixed(n); (****) Though we can't totaly remove
-  the imprecision. 
+  it to use the method toFixed(n); (****)
 */
 
 // *
@@ -179,3 +178,140 @@ console.log((1.3).toFixed(100));
 // ****
 let sum = 0.1 + 0.2;
 console.log(sum.toFixed(3)); // 0.300
+
+/* 
+  -------------------------
+  Tests: isFinite and isNaN
+  -------------------------
+
+  isNaN takes the argument, converts it and checks if it is NaN. We cannot
+  use === NaN, because NaN is not equal to anything, nor to itself.(*)
+
+  isFinite converts the argument to a number, and returns true if it is a 
+  regular number, not NaN/Infinity/-Inifity
+
+  Sometimes isFinite is used to validade whether a string is a regular 
+  number. (***)
+*/
+
+// *
+let string = "some text";
+console.log(isNaN(string)); // true
+console.log(isNaN(NaN)); // true
+console.log(NaN === NaN); // false
+
+// **
+console.log(isFinite("748")); // true -> string converted to nr
+console.log(isFinite("abc")); // false -> NaN
+console.log(isFinite(NaN)); // false till line $
+console.log(isFinite(Infinity));
+console.log(isFinite(-Infinity)); // $
+console.log(isFinite(989034589035489083)); // true
+
+// ***
+// let numberA = +prompt("enter a nr", "nr...");
+// console.log(isFinite(numberA));
+
+/* 
+  --------------------------------
+  Number.isNaN and Number.isFinite
+  --------------------------------
+
+  Those 2 are more strict versions of isNaN and isFinite. They do not 
+  autocovert their argument into a number, but check if it belongs to.
+
+  Number.isNaN(value) returns true if the argument belongs to number and
+  it is NaN. (*)
+
+  Number.isFinite(value) returns true if the argument belongs to the 
+  number type and it is not NaN/Infinite/-Infinity(**)
+
+*/
+
+// *
+console.log(Number.isNaN(NaN)); // true
+console.log(typeof NaN); // number
+console.log(isNaN(NaN)); // true
+
+console.log(Number.isNaN("str" / 2)); // true
+console.log(typeof ("str" / 2)); // number
+console.log(isNaN("str" / 2)); // true
+
+console.log(Number.isNaN("str")); // false
+console.log(typeof "str"); // string
+console.log(isNaN("str")); // true
+
+// **
+
+console.log(Number.isFinite(123)); // true
+console.log(Number.isFinite(Infinity)); // false
+console.log(Number.isFinite(2 / 0)); // false (weird result(infinity) by the way!)
+
+console.log(Number.isFinite("123")); // false
+console.log(isFinite("123")); // true
+
+/* 
+  --------------------------
+  Comparisons with Object.is
+  --------------------------
+  
+  Object.is() compares two values for strict equality, but it has an interesting
+  feature, it result in true when compare to NaN values(*), and it differentiate
+  0 and -0, which is technically correct.(**)
+
+*/
+
+// *
+console.log(Object.is(NaN, NaN)); // true
+
+// **
+console.log(Object.is(0, -0)); // false
+
+/*
+  -----------------------
+  parseInt and parseFloat
+  -----------------------
+
+  Those two functions are very handy when we need to extract the number from
+  a string that has other characters beside the number itself, like '100px' in
+  css and maybe '12$'. So with the + or Number(), we cannot do that.(*) As we
+  can see we get NaN. They read a number from a string untill they can't, in 
+  case of an error, the gathered number is returned. (**)
+
+  By unsing the second argument of parseInt(str, radix), we can specify the base
+  of the numeral system in the first argument, so we can parse strings of 
+  hex, binary, etc. (***)
+
+*/
+
+// *
+Number("23px"); // NaN
++"23px"; // NaN
+
+// **
+console.log(parseInt("1923px")); // 1923
+console.log(typeof parseInt("1923px")); // number
+console.log(parseInt("19.23px")); // 19 (returns integer)
+
+console.log(parseFloat("19.2.3px")); // 19.2 (the second point stops the readingk)
+
+console.log(parseFloat("a123")); // NaN (the first digit stops reading)
+
+// ***
+console.log(parseInt("0xfc", 16)); // 252
+console.log(parseInt("101110101010111", 2)); // 23895
+
+/* 
+  --------------------
+  Other math functions
+  --------------------
+
+  JavaScript has a small library called Math with functions and constants. (*)
+  There are more function to see in the object Math. 
+*/
+
+console.log(Math);
+console.log(Math.random()); // returns a random nr from 0 to 1(not including 1)
+console.log(Math.max(1, 2, 5, 3, 2, 0, 7, 3)); // max nr in the list
+console.log(Math.min(1, 2, 5, 3, 2, 0, 7, 3)); // min nr in the list
+console.log(Math.pow(3, 8)); // raises n to given power
