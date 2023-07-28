@@ -1,3 +1,4 @@
+"use strinct";
 /* 
   -------------
   Array methods
@@ -291,8 +292,17 @@ console.log(toKindergarden); // Petru, Victor, Daniel (objects)
 
   Sorts the array in place.(**) But it uses string comparison. The method
   accepts a ordering function, which will be used to apply another sorting, 
-  not the default one. 
+  not the default one. (***)
 
+  A comparison function is required to return a positive number for greater, 
+  and negative for smaller. We can omit 0 for equality. (****) That allows
+  to write shorter functions. 4 - 3 = 1 (positive nr) 4 > 3 
+  2 - 4 = -2 (negative nr) 2 < 4, pretty simple. 
+
+  The function returns the sorted array. (#)
+
+  In cases when we have diactrics, we can use localCompare, for more 
+  correct comparison. (##)
 */
 
 // *
@@ -305,3 +315,137 @@ console.log(toSuper); // ['super', 'super', 'super']
 // **
 let arr16 = [5, 343, 56, 3, 23, 324];
 console.log(arr16.sort()); // [23, 3, 324, 343, 5, 56]
+
+// ***
+function compareNrs(a, b) {
+  if (a > b) return 1;
+  if (a == b) return 0;
+  if (a < b) return -1;
+}
+
+let arr17 = [5, 343, 56, 3, 23, 324];
+console.log(arr17.sort(compareNrs));
+
+// ****
+
+let arr18 = [4, 2, 7, 3];
+console.log(
+  arr18.sort(function (a, b) {
+    console.log(a, b);
+    return a - b;
+  })
+);
+
+// #
+let arr19 = [4, 2, 7, 3];
+
+let arr20 = arr18.sort(function (a, b) {
+  console.log(a, b);
+  return a - b;
+});
+
+console.log(arr19); // initial state
+console.log(arr20); // sorted
+
+// ##
+
+let countries = ["Österreich", "Andorra", "Vietnam"];
+
+console.log(countries.sort((a, b) => (a > b ? 1 : -1)));
+console.log(countries.sort((a, b) => a.localeCompare(b)));
+
+/* 
+  reverse: each element of the array switches to the oposite possition. 
+  It mutates the array. 
+*/
+let arr21 = [45, 34, 23, 54];
+console.log(arr21.reverse()); // [54, 23, 34, 45];
+console.log(arr21); // [54, 23, 34, 45]
+
+/* 
+  split and join
+
+  In cases we need from a string to populate an array (*)To do the 
+  opposite, a string from an array, we can use join() (**)
+*/
+
+// *
+let persons = "John, Jimi, Anatol, Vasile";
+let persArr = persons.split(",");
+console.log(persArr); // ['John', ' Jimi', ' Anatol', ' Vasile']
+
+let eachChar = persons.split("");
+console.log(eachChar);
+// ['J', 'o', 'h', 'n', ',', ' ', 'J', 'i', 'm', 'i', ',', ' ', 'A', 'n',
+// 'a', 't', 'o', 'l', ',', ' ', 'V', 'a', 's', 'i', 'l', 'e']
+
+// **
+let toStr = persArr.join("|");
+console.log(toStr); // John| Jimi| Anatol| Vasile
+
+/* 
+  reduce/reduceRight
+
+  those two methods, are used to calculate a value based on the array. 
+
+  The function is applied to all elements of the array, one after another,
+  it carries on the result to the next call. 
+  
+  accumulator is equal to the result of the previous function call,
+  equal to the initial if provided. 
+
+  Get a sum of all elements from the array.(*) Typically it is enough to
+  provide 2 arguments, the accumulator and the current value. Initial 
+  value can be omited, in this case, as initial value is taken the first
+  element from the array, and the iteration starts from the second one. 
+  If the array is empty, without the initial value in the reduce, we'll 
+  get an error. 
+
+  The method reduceRight, does the same but from right to left.
+*/
+
+// *
+let arr24 = [1, 3, 2];
+let result = arr24.reduce((sum, current) => sum + current, 0);
+console.log(result); // 6
+
+/* 
+  Array.isArray
+
+  As array are objects, we can't distinguish them with typeof. (*)
+
+  Array.isArray(value), takes care of that returning a boolean.(*)
+*/
+
+let arrSpy = {};
+
+let arr26 = [];
+let arr27 = new Array();
+
+console.log(typeof arr26); // object
+console.log(typeof arr27); // object
+
+console.log(Array.isArray(arr26)); // true
+console.log(Array.isArray(arr27)); // true
+console.log(Array.isArray(arrSpy)); // false gotcha :(
+
+/* 
+  Most methods support 'thisArg'
+
+  Which means in pretty much all methods we can use this argument to
+  set the 'this' of the function.(*) If we'll not provide thisArd in
+  the example (*) we'll get nothing as a result.
+*/
+
+let school = {
+  minAge: 15,
+  maxAge: 18,
+  canJoin(student) {
+    return student.age >= this.minAge && student.age <= this.maxAge;
+  },
+};
+
+let students = [{ age: 12 }, { age: 17 }, { age: 22 }, { age: 16 }];
+
+let allowedStudents = students.filter(school.canJoin, school);
+console.log(allowedStudents); // 17 and 16 objects

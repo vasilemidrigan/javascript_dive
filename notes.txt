@@ -71,3 +71,5 @@ Arrays
 ------
 
 A maximal subarray task to solve
+
+understand localCompare
