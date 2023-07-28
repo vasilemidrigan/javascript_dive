@@ -60,9 +60,6 @@ console.log(str.length); // 11
   brackets return undefined for negative integers. (**)
  
   We can iterate over each character using for..of(***)
-
-
-
 */
 
 // *
@@ -92,8 +89,6 @@ for (let char of str1) {
   In JavaScript, string can't be changed, it is imposible to change a character.(*)
   
   However, we can replace the string. (**)
-
-
 */
 
 // *
