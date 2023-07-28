@@ -229,9 +229,17 @@ console.log(textC.endsWith("ex")); // false
   str.slice(start [, end]) - returns a part of the string from start to,
   but not including end. (*) We can get the hole string, a part from the
   start, or from the end, a single character, etc. 
+  
+  str.substring(start, [, end]) - returns the part of the string from
+  start to the end, not including end. It is the as slice, but it allows
+  to make start greather than the end, which swaps start and end values.(**)
+  Negative values means 0.
 
-
-
+  str.substr(start, [, length]) - returns the part of the string from start
+  with the given length. The difference from those two above, is that this
+  method allow us to specify the length of the sub-string, not the end point.
+  (***) In practice it is sopported everywhere, though in specification it is
+  recommended to use it only in browser-hosted js engines. 
 */
 
 // *
@@ -243,3 +251,75 @@ console.log(stringA.slice(-4, -1)); // rem   (1, 2, 3)
 console.log(stringA.slice(2)); // lore          (2, 3, 4)
 console.log(stringA.slice(-1)); // m                  (4)
 console.log(stringA.slice(2, 3)); // m          (3)
+
+// **
+let strA = "some text";
+
+console.log(strA.substring(0)); // some text
+console.log(strA.substring(0, 2)); // so
+console.log(strA.substring(2, 5)); // me
+console.log(strA.substring(4, 1)); // ome
+console.log(strA.substring(-2)); // some text
+
+// ***
+let strB = "some text";
+console.log(strB.substr(0, 3)); // som    ! deprecated
+console.log(strB.substr(0, 6)); // some t
+console.log(strB.substr(5, 4)); // text
+
+/* 
+  -----------------
+  Comparing strings
+  -----------------
+
+  In JavaScript, strings, are compared character-by-character, so if there
+  is a character greather than another one, no matters the rest of the string, 
+  it can be longer than the first, the first one is greather because the 
+  character has a greather value in UTF-16 table. (*)
+
+  Let's understand what is happening in the example above, let's see(**)
+  To get the code that belongs to a certain character we can do that(**), 
+  and vice versa (***) We can even get a hexadecimal value (#)
+
+  We can print for 600 characters from UTF-16 (****)
+
+  The right way of comparing strings is a lot more complex that it may seem, 
+  because alphabets are different for different languages. The browser needs
+  to know the local language in wich to perform the comparison. The 
+  str.localeCompare(str2), returns an integer indicating wheter str is less
+  equal or greather than str2 according to the language rules. This method
+  have two additional arguments, specify the language, which is taken by 
+  default from the environment, letter, or depends on the language, and
+  setup additional rules like case sensitivity, should diacritics treated 
+  like regular characters, etc. (#)
+
+  There are more string methods, we can for example remove spaces from the
+  beggining and the end of a string with str.trim(), we can reapeat a string
+  by using str.repeat(), etc. 
+*/
+
+// *
+
+let word = "white";
+let word1 = "black and white";
+
+console.log(word > word1); // true
+
+// **
+console.log("w".codePointAt(0)); // 119   as we can see, 'w' is greather
+console.log("b".codePointAt(0)); // 98    than 'b'
+console.log("b".codePointAt(0).toString(16)); // 62
+
+// ***
+console.log(String.fromCodePoint(90)); // Z
+console.log(String.fromCodePoint(0)); // empty string
+
+// ****
+for (let i = 0; i <= 600; i++) {
+  console.log(String.fromCodePoint(i), i);
+}
+
+// #
+console.log("Z".localeCompare("z")); // 1 true
+console.log("a".localeCompare("1")); // 1 true
+console.log("a".localeCompare("Z")); // -1 false
