@@ -244,3 +244,164 @@ for (let el of arrP) {
 for (let key in arrP) {
   console.log(`${key} - ${arrP[key]}`);
 }
+
+/* 
+  -------------------
+  A word about length
+  -------------------
+  
+  The length property is not about counting the elements in the array,
+  but the greatest index plus one. An array with a single element, will
+  give big length(*)
+  
+
+  length property is writable. We can increase it manualy and we can de-
+  carease it, which will lead to truncation, and it is ireversible. (**)
+
+  The simples way to clean an array is to set length to zero(***)
+*/
+
+// *
+
+let arrQ = [];
+arrQ[5464] = "string";
+console.log(arrQ.length); // 5465
+
+// **
+let arrZ = [23, 345, 56, 23, 237];
+
+console.log(arrZ.length); // 5
+
+arrZ.length = 10;
+console.log(arrZ); // [23, 345, 56, 23, 237, empty × 5]
+console.log(arrZ.length); // 10
+
+arrZ.length = 3;
+console.log(arrZ); // [23, 345, 56]
+console.log(arrZ.length); // 3
+
+arrZ.length = 5;
+console.log(arrZ); // [23, 345, 56, empty x 2] //elems are gone
+console.log(arrZ.length); // 3
+
+// ***
+arrZ.length = 0;
+console.log(arrZ); // []
+console.log(arrZ.length); // 0
+
+/* 
+  -----------
+  new Array()
+  -----------
+  
+  The syntax: (*)
+
+  Usually [] are shorter to use, and there is a tricky feature with 
+  new Array(): (**) If the new Array is created with a single argument
+  which is a number, it will create an array with the length of the
+  given argument, but without any elements inside. 
+
+  So it is highly recommended to use [] unless we really know what we 
+  are doing. 
+*/
+
+// *
+let arrW = new Array("elements", true, 234);
+console.log(arrW);
+
+// **
+let arrR = new Array(3);
+console.log(arrR[0]); // undefined
+console.log(arrR.length); // 3
+
+/* 
+  -----------------------
+  Multidimensional arrays
+  -----------------------
+
+  We can nest arrays as much as we want, build matrices etc. (*)
+*/
+
+let nestedArr = [
+  "1st lvl",
+  [
+    "2nd lvl",
+    [
+      "3rd lvl",
+      ["4th lvl", "there is some light", ["5th lvl", 12, "darkness"]],
+    ],
+  ],
+];
+
+/*
+  --------
+  toString 
+  --------
+
+  Arrays have their method toString, that returns a comma-separated list
+  of elements. (*)
+
+
+
+*/
+let array = ["date", 342, 567, true, undefined, false, { name: "Leonardo" }];
+console.log(array.toString()); // date,342,567,true,,false,[object Object]
+console.log(String(array)); // date,342,567,true,,false,[object Object]
+
+/* 
+  -----------------
+  Arrays conversion
+  -----------------
+  
+  Some general conversions.(*)
+*/
+
+// *
+
+let arrayZ = [];
+let arrayX = [5];
+let arrayZ1 = [-9];
+let arrayX1 = [5, 7];
+
+console.log(Number(arrayZ)); // 0
+console.log(Number(arrayX)); // 5
+console.log(Number(arrayZ1)); // -9
+console.log(Number(arrayX1)); // NaN
+
+console.log(String(arrayX1)); // 5, 7
+
+console.log(Boolean(arrayX1)); // true
+console.log(Boolean(arrayZ1)); // true
+
+/* 
+  ----------------------------
+  Don't compare arrays with ==
+  ----------------------------
+
+  Like with objects, if we compare arrays with == it will return false, 
+  and only if there's two variables that reference the same array will
+  return true.(*)
+
+  Comparison with primitives gives some strange results, seemingly:(**)
+  
+  In the example (***) array gets converted to primitive and becomes an 
+  empty string
+
+  To correctly compare arrays, we need to use loops and compare element 
+  by element. 
+*/
+
+// *
+
+let arrT = [];
+let arrY = [];
+let arrI = arrY;
+console.log(arrT == arrY); // false
+console.log(arrI == arrY); // true
+
+// **
+console.log([] == []); // false (different objects)
+console.log([1] == [1]); // false (different objects)
+
+console.log(0 == []); // *** true
+console.log("0" == []); // false (different objects)
