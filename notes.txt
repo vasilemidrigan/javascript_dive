@@ -65,3 +65,9 @@ to solve https://javascript.info/task/random-min-max
 to solve https://javascript.info/task/random-int-min-max
 
 Tagged templates (understand how it works) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates
+
+------
+Arrays
+------
+
+A maximal subarray task to solve
