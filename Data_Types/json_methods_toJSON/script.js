@@ -29,6 +29,8 @@
   Nested objects are converted as well. (#) 
 
   !Note: No circular references. (##)
+
+  JSON doesn't support comments. 
 */
 
 // *
@@ -207,8 +209,71 @@ console.log(indentJSON1);
 /* 
   Custom "toJSON"
 
-  We can create our own custom toJSON(), which will be aplied in cases
+  We can create our own customized toJSON(), which will be aplied in cases
   when there is a conversion to JSON, just like toString for string 
-  conversion.
-
+  conversion. (*)
 */
+
+// *
+
+let bird = {
+  name: "eagle",
+  age: 3,
+
+  toJSON() {
+    return { name: `${this.name.toUpperCase()}`, age: `${this.age}` };
+  },
+};
+
+let animal = {
+  name: "opossum",
+  predator: false,
+  bird,
+};
+
+let animalJSON = JSON.stringify(animal);
+
+console.log(animalJSON);
+
+/* 
+  JSON.parse
+
+  The opposite of .stringify().
+
+  Converts JSON to JS object. (*)
+*/
+
+// *
+let jsonA = `
+{
+  "name": "object d",
+  "nested": {
+    "color": "red",
+    "age": 13
+  }
+}
+`;
+
+let toObj = JSON.parse(jsonA);
+
+console.log(toObj); // js object here
+
+/* 
+  Using reviver
+
+  In cases when we for example receive a stringified object from the server, 
+  and we convert it back into a JS object to work with further. There is a 
+  date object which we need, so we call object.date.getDate() and we get 
+  the error, because we need to convert the date to a Date object in order
+  to work with it further. For this purposes we can use revive, is like the 
+  replacer for JSON.stringify(). (*)
+*/
+
+let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
+
+let meetup = JSON.parse(str, function (key, value) {
+  if (key == "date") return new Date(value);
+  return value;
+});
+
+console.log(meetup.date.getDate()); // now works!
