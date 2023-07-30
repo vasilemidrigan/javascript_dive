@@ -73,3 +73,7 @@ Arrays
 A maximal subarray task to solve
 
 understand localCompare
+
+Map and Set:
+  - filter anagrams solve
+  - iterable keys solve
