@@ -1,285 +1,163 @@
 /* 
-  Destructuring Assignment
+  Date and Time
 
-  It allows to unpack arrays or objects into a bunch of variables. 
+  Stores the date and time, and provides methods for date/time. 
 
-  Array Destructuring
+  Creation
 
-  It doesn't modify the original array or object.
+  Create a Date object, without parameters, creates an object for the
+  current time.(*)
 
-  destructure an array(*) 
+  A timestamp - is an integer number, representing the time passed from
+  the begining of the 1970. 
 
-  destructure a string(**)
+  We can create a date from a timestamp - new Date(timestamp) and convert
+  the existing Date object to a timestamp using the date.getTime() (**)
 
-  use comma to skip elements of the array(***) The variables copies ele-
-  ments from the array in the exact same order, if there is more elements
-  than variables, the rest elements are ignored. 
+  Dates before 1970 have negative timestamps.
+  
+  Create date(only first two arguments are obligatory): 
+  new Date(year, month, date, hours, minutes, seconds, ms) (***)
+  
+  year - 4 digits,
+  month - starts from 0 to 11
 
-  Works if any iterable on the right-side. (#)
+  Access data from the Date obj:
+  getFullYear()
+  getMonth()
+  getDate()
+  etc
 
-  We can use assignables on the left side. (##)
+  getDay() from 0 to 6
 
-  Looping with entries (###)
-
-  We can swap variables ($) Or more variables in this way.
-
-
+  There are setting date components (****)
 */
 
 // *
-let person = ["Leonardo", "Midrigan"];
-let [firstname, lastname] = person;
 
-console.log(firstname);
-console.log(lastname);
+let now = new Date();
+
+// Sun Jul 30 2023 19:17:57 GMT+0100 (Western European Summer Time)
+console.log(now);
 
 // **
-let [name, where] = "Leonardo Portugal".split(" ");
-console.log(name);
-console.log(where);
+let jan02_1970 = new Date(24 * 3600 * 1000);
+
+// Fri Jan 02 1970 01:00:00 GMT+0100 (Western European Standard Time)
+console.log(jan02_1970);
 
 // ***
-let arr = ["Vasile", "Leonardo", "Profira", "Natalia"];
-let [husband, , wife] = arr;
-console.log(husband);
-console.log(wife);
 
-// #
-let set = new Set();
-set.add({ a: 1 });
-set.add({ b: 2 });
-set.add("data");
+// Fri Jun 04 1993 01:00:00 GMT+0200 (Western European Summer Time)
+let myBirthday = new Date(1993, 5, 4, 1);
+console.log(myBirthday);
 
-let [obj1, obj2, string] = set;
+// ****
+let date = new Date();
 
-// ##
-let friend = {};
+date.setFullYear(1993);
+date.setHours(4);
 
-[friend.name, friend.lastname] = "Leonardo Midrigan".split(" ");
-console.log(friend); // {name: 'Leonardo', lastname: 'Midrigan'}
-
-// ###
-let user = {
-  name: "Leonardo",
-  lastName: "Midrigan",
-};
-
-for (let [key, value] of Object.entries(user)) {
-  console.log(key, value);
-}
-
-// $
-let guest1 = "John";
-let guest2 = "Michael";
-
-[guest1, guest2] = [guest2, guest1];
-
-console.log(guest1);
-console.log(guest2);
+// Fri Jul 30 1993 04:59:17 GMT+0200 (Western European Summer Time)
+console.log(date);
 
 /* 
-  The rest '...'
+  Autocorrection
 
-  If the array is longer than the list at the left, the extra items are 
-  ignored. 
-
-  To use them too, we can use the rest operator.(*)
-*/
-
-// *
-let [name1, name2, ...rest] = "Dorin Marin Julius Cesar Augustus".split(" ");
-
-console.log(name1);
-console.log(name2);
-console.log(rest); // ['Julius', 'Cesar', 'Augustus']
-
-/* 
-  Default values
-
-  We can provide default values in case on the right will be less items than
-  on the left.(*) These values can be complex expressions or even functions. 
-*/
-
-let [player1 = "Spy", player2 = "Terminator", player3 = "Anonymous"] = [
-  "spy84588",
-  "terminator84757",
-];
-
-console.log(player2);
-console.log(player3);
-
-/* 
-  Object Destructuring
-
-  On object destructuring we're using {} on the left. 
-
-  The variables names on the left needs to be equal to the objects properties
-  names on the right. (*)
-
-  If we want another name for the variable to the right we have to use 
-  the syntax variableName : newVariableName (**)
-
-  Set default value (***)
-
-  Default values + another name for the variable (#)
-
-  Default parameters can be any expressions or func calls. 
-
-  We can also extract only the property we need from an object. (##)
-
+  If we set out of range values Date, JS will fix them.(*)
   
-*/
-
-// *
-let obj = {
-  office: "White House",
-  title: "President",
-  party: "Republicans",
-};
-
-let { office, title, party } = obj;
-console.log(title);
-
-// **
-let { office: cabinet, title: t, party: p } = obj;
-console.log(t);
-
-// ***
-let colors = {
-  red: "blood",
-  blue: "sky",
-};
-
-let { red = "sunshine", blue = blue } = colors;
-
-// #
-
-let animal = {
-  name: "opossum",
-  predator: false,
-};
-
-let { name: nikname = "OpposumBigRat", predator } = animal;
-
-// ##
-let planet = {
-  name: "Earth",
-  life: true,
-  size: "small planets",
-};
-
-let { life } = planet;
-console.log(life); // true
-
-/* 
-  The rest pattern '...'
-  
-  Just like with arrays, we can use rest operator (*)
-
-  The code in the example (**) will throw an error, because JS treats 
-  the code on the left of = as a code block that group statements. So 
-  in order to be able to do that, we need to wrap the hole line 
-  between parantheses. 
-
+  Increase the date (**)
 */
 
 // *
 
-let earth = {
-  name: "Earth",
-  life: true,
-  size: "small planets",
-};
+let meetup = new Date(2024, 5, 33);
 
-let { name: planetName, ...properties } = earth;
-console.log(properties); // {life: true, size: 'small planets'}
+// Wed Jul 03 2024 00:00:00 GMT+0100 (Western European Summer Time)
+console.log(meetup);
 
 // **
 
-let car = {
-  color: "grey",
-  power: 5500,
-  seats: 7,
-};
+meetup.setDate(meetup.getDate() + 35);
 
-let color, power, seats;
-
-// {color, power, seats} = {car}; // Error
-({ color, power, seats } = car);
-console.log(power); // 5500
+// Wed Aug 07 2024 ...
+console.log(meetup);
 
 /* 
-  Nested destructuring
+  Date to number, date diff
 
-  If an object or an array, contains complex data we can use more
-  complex left-side patters, that mirrors the right side.(*)
+  Date converted to number = timestamp (*)
 
-*/
-
-// *
-let house = {
-  roomsAmount: 4,
-  kitchen: {
-    fridge: true,
-    conditioning: true,
-  },
-  rooms: ["bathroom", "kitchen", "hall", "bedroom"],
-};
-
-let {
-  roomsAmount,
-  kitchen: { fridge, conditioning },
-  rooms: [room1, room2, room3, room4],
-} = house;
-
-console.log(fridge);
-console.log(room2);
-// console.log(kitchen); // is not defined (we take it's content instead)
-
-/* 
-  Smart function parameters
-  
-  For functions with many paramaters, most of which are optional, we need 
-  a way to call the function with most parameters ok by default. (*) This
-  code seems pretty ugly. We have to remember the order of parameters, and
-  specifically mention undefined ones. 
-    
-  Instead we can pass parameters as an object, and the function destructu-
-  rizes them into variables. (**) Note that the function now accepts an
-  object, not separated parameters.
-
-  The syntax with default values and another names is the same as with 
-  destructuring above. 
-
-  If we want all variables by default, we just pass an empty object. 
-
+  Calculate the difference in time (**)
 */
 
 // *
 
-function logPhrase(
-  greeting = "Hello",
-  whom = "human",
-  when = "23.01.23",
-  where = "Portugal"
-) {
-  console.log(`${greeting} ${whom}, today is ${when} and we are in ${where}`);
-}
-
-logPhrase(undefined, undefined, undefined, "United States");
+console.log(meetup.getTime()); // 1722985200000
 
 // **
-function logPhrase1({
-  greeting = "Hello",
-  whom = "human",
-  when = "23.01.23",
-  where = "Portugal",
-}) {
-  console.log(`${greeting} ${whom}, today is ${when} and we are in ${where}`);
-}
-let data = {
-  whom: "elf",
-  where: "Forests Kingdom",
-};
+let start = new Date();
+console.log(start);
 
-logPhrase1(data);
+for (let i = 0; i < 1000000; i++) {
+  let x = i * i * i;
+}
+
+let end = new Date();
+
+console.log(end);
+console.log(`The loop took ${end - start}`);
+
+/* 
+    Date.now()
+
+    If need to only measure time, no need for Date object, instead use
+    Date.now(), it doesn't create the date object, so no pressure on 
+    garbage collection. 
+
+    It is pretty handy in terms of performance. 
+*/
+
+let time = Date.now();
+
+console.log(time); // 1690745483957
+
+/* 
+  Benchmarking
+
+  Two functions that calculate the difference between two dates, which one
+  is faster, such performance measurements are called benchmarks. (*)
+*/
+
+// *
+
+function diffSubtract(date1, date2) {
+  return date2 - date1;
+}
+
+function diffGetTime(date1, date2) {
+  return date2.getTime() - date1.getTime();
+}
+
+function bench(f) {
+  let date1 = new Date(0);
+  let date2 = new Date();
+
+  let start = Date.now();
+  for (let i = 0; i < 100000; i++) f(date1, date2);
+  return Date.now() - start;
+}
+
+console.log("Time of diffSubtract: " + bench(diffSubtract) + "ms");
+console.log("Time of diffGetTime: " + bench(diffGetTime) + "ms");
+
+/* 
+  Date.parse from a string
+
+  Read the date from a string, format: YYYY-MM-DDTHH:mm:ss.sssZ, shorter
+  options are also allowed.(*)
+*/
+
+let today = Date.parse("2023-06-30");
+
+console.log(today);
