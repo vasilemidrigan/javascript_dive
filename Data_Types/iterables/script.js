@@ -13,6 +13,8 @@
   (list, set) of something, then for..of is a great syntax to apply over
   it. 
 
+  Iterables are: Arrays, Maps, Sets, Strings, Typed Arrays. 
+
   Symbol.iterator
   ---------------
     
