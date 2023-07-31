@@ -81,3 +81,5 @@ Map and Set:
 Recursion topic to see https://javascript.info/recursion
 
 The old var to take https://javascript.info/var
+
+Review new-function syntax
