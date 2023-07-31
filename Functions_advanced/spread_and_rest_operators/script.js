@@ -12,7 +12,7 @@
 
   Or we can have some parameters as variables, and the rest as an array(****)
 
-  The rest parameters, must always be at the end. 
+  The rest parameters, must always be at the end.   
 */
 
 // *
@@ -106,6 +106,83 @@ a(2, 3); // 2, 3
 
   Internally spread uses iterators to gather elements just like the 
   for..of does. 
-
-
+  
+  We can convert a string into an array of characters with sprea and
+  with Array.from(), the difference between those two though, is that
+  Array.from() works with iterables and array-like objects, while
+  spread works only with iterables. (###)
 */
+
+// *
+
+function sumD(a, b, ...args) {
+  let sumAB = a + b;
+
+  for (let arg of [...args]) {
+    sumAB += arg;
+  }
+
+  return sumAB;
+}
+
+console.log(sumD(3, 4, 6, 7, 8, 9, 9)); // 46
+
+// **
+let arr = [1, 2, 3, 4];
+let arr1 = [1, 3, 9, 4];
+
+Math.max(...arr, ...arr1);
+
+// ***
+Math.max(...arr, 7, 9, ...arr1, 10);
+
+// #
+let mergedArr = [...arr, 857, 45, arr1];
+
+// ##
+
+console.log(..."this is a text");
+
+// ###
+
+let str = "hello";
+
+console.log([...str]);
+
+console.log(Array.from(str));
+
+let x = {
+  0: 1,
+  1: 2,
+  length: 2,
+};
+
+console.log(Array.from(x));
+// console.log([...x]); // Error: x is not iterable
+
+/* 
+  Copy an array/object
+
+  With spread operator we can copy the content of an array into another, 
+  keeping at the same time different references. (*)
+
+  The same is applied to objects(**) It is much shorter than Object.assign()
+*/
+
+// *
+
+let arr3 = [1, 2, 3];
+let arr4 = [...arr3];
+
+arr3[0] = "a";
+
+console.log(arr4); // [1, 2, 3]
+
+// **
+
+let obj1 = { a: 1 };
+let obj2 = { ...obj1 };
+
+obj1.a = 3;
+
+console.log(obj2); // {a: 1}
