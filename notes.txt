@@ -79,3 +79,5 @@ Map and Set:
   - iterable keys solve
 
 Recursion topic to see https://javascript.info/recursion
+
+The old var to take https://javascript.info/var
