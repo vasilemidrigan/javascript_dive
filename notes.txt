@@ -88,3 +88,4 @@ Review nested setTimeout
 
 Method borrowing
 
+Function binding (review going partial without context)
