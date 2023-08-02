@@ -86,3 +86,5 @@ Review new-function syntax
 
 Review nested setTimeout
 
+Method borrowing
+
