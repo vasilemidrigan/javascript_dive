@@ -93,3 +93,5 @@ Function binding (review going partial without context)
 Arrow function - Arrows have no “arguments” review
 
 Review Advanced working with functions 
+
+Study Overriding class fields: a tricky note --- later
