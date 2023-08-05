@@ -97,3 +97,5 @@ Review Advanced working with functions
 Study Overriding class fields: a tricky note --- later
 
 Study https://javascript.info/instanceof (Bonus section and till the end)
+
+understand wrapping exceptions https://javascript.info/custom-errors
