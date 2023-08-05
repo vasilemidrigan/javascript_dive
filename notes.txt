@@ -101,3 +101,5 @@ Study https://javascript.info/instanceof (Bonus section and till the end)
 understand wrapping exceptions https://javascript.info/custom-errors
 
 Review Promises 
+
+Review and understand promisification
