@@ -8,6 +8,10 @@
   demand. They work great with iterables, allowing to create data streams
   with ease. 
 
+  One of the features of generator functions, is that we exchange values
+  results via next/yield calls with the calling code, which is quite 
+  unique, and they are great on making iterable objects. 
+
   Generator functions
   -------------------
 
@@ -178,7 +182,9 @@ console.log(x.next());
   yield not only returns the result to the outside, but it can also 
   pass the value inside the generator. 
 
-
+  Each next(value), excluding the first one, passes a value into the 
+  generator, that becomes the result of the current yield, and then 
+  gets back the result of the next yield.
 */
 
 // *
@@ -209,6 +215,64 @@ function* genA() {
 
 let generatorD = genA();
 
-console.log(generatorD.next().value);
-console.log(generatorD.next(4).value);
-console.log(generatorD.next(9).value);
+console.log(generatorD.next().value); // '2 + 2 = ?'
+console.log(generatorD.next(4).value); // 4 | '3 * 3 = ?'
+console.log(generatorD.next(9).value); // 9 | undefined
+
+/* 
+  generator.throw
+  ---------------
+
+  As an error is a kind of result, it can also initiate(throw) an error
+  in the yield, in the generator. 
+
+  For that to happen, we need to call generator.throw(err), so in that 
+  case, the err is thrown in the line with that yield. (*)
+
+  If we don't catch the error there, it will fall through to the outer
+  calling code if there is any, and if still uncaught, then it will 
+  kill the script. 
+*/
+
+// *
+
+function* genB() {
+  try {
+    let result = yield "2 + 2 = ?";
+
+    console.log(`As the exception is thrown above, the execution doesn't 
+    reach here`);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+let generatorE = genB();
+
+let questionA = generatorE.next().value;
+
+generatorE.throw(new Error("The answer is gone!"));
+
+/* 
+  generator.return
+  ----------------
+
+  It finishes the generator execution and return the given value, if
+  use it again, it will return the same value.(*)
+
+  It can be useful when we want to stop generator in a specific condition.
+*/
+
+// *
+
+function* g() {
+  yield 1;
+  yield 2;
+  yield 3;
+  yield 4;
+}
+
+const g1 = g();
+
+console.log(g1.next()); // {value: 1, done: false}
+console.log(g1.return("stop here")); // {value: 'stop here', done: true}
