@@ -103,3 +103,5 @@ understand wrapping exceptions https://javascript.info/custom-errors
 Review Promises 
 
 Review and understand promisification
+
+Practice generators and async generators more
