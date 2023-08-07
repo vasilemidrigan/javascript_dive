@@ -29,7 +29,7 @@
   That's how we can import default along with named ones(###) see module_3.js
 
   If importing everything with * as an object, then the default property is
-  exactly the default export($) see module_4.js
+  exactly the default export($) see module_4.js and current file
 
   There are some moments against default exports: 
   - Named exports force us to use the exact right name to import
@@ -98,5 +98,21 @@ console.log(randomData.default);
   Re-export
   ---------
 
-  
+  By using re-export, we import a module from a file and export it further, 
+  but, the big caveat is that this module is not available in the file the
+  re-exports it. (%) see module_5.js and current file
+
+  Re-exporting defaults have some little details to keep in mind when work with:
+  - to re-export a default we have to write: export {default as User}
+  - export * from 'file.js' exports only named exports, and ignores the default
+  one. 
+
+  So to export named and default exports, we have to write those two lines from 
+  above. 
 */
+
+// %
+
+export { foo } from "./module_5.js";
+
+// console.log(foo); // ERROR: foo is not defined
