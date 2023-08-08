@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!--
+      We can access an element by its id (*)
+    -->
+
+    <div id="elem">
+      // * some text here...
+      <div id="elem-content"></div>
+      <div id="el"></div>
+    </div>
+
+    <script>
+      // *
+      let elem = document.getElementById("elem");
+      elem.style.border = "1px solid blue";
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
