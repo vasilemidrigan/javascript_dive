@@ -69,6 +69,45 @@ elem.style.background = "purple";
   ------------------------------
 
   To position something, usually we need coordinates. 
-
   
+  We can use our box that we want to position, set the position:fixed,
+  then use right/left, and elem.getBoundingClientRect() to get
+  the coordinates. So we are positioning our element by using the
+  coordinates from the method above. 
+  
+  As the element is positioned fixed, it will remain in the same coordinates 
+  relative to the window, even when scrolling. 
+
+  Document coordinates
+  --------------------
+
+  If we want document-relative coordinates, we need position absolute.
+
+  Coordinates start from upper-left corner of the document, not the window.
+
+  There is no standard method to get the document coordinates, but it is 
+  easy to write them:
+  pageY = clientY + height of the scrolled out vertical part of the document.
+  pageX = clientX + width of the scrolled out horizontal parte of the document.
+
+  The function getCoords(elem) will take window coordinates from 
+  elem.getBoundingClientRect() and add the current scroll to them(*)
+
+  So we can use coordinates for a more precise styling, by combining 
+  window and document coordinates and css positioning styles. 
 */
+
+// *
+
+function getCoords(elem) {
+  let box = elem.getBoundingClientRect();
+
+  return {
+    top: box.top + window.pageYOffset,
+    rigth: box.right + window.pageXOffset,
+    bottom: box.bottom + window.pageYOffset,
+    left: box.left + window.pageXOffset,
+  };
+}
+
+console.log(getCoords(square));
