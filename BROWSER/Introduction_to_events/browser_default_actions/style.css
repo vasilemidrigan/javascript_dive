@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: grey;
+}
+
+a,
+input,
+#outer,
+#inner {
+  margin: 20px;
+}
+
+#outer {
+  width: 200px;
+  height: 200px;
+  background-color: bisque;
+}
+
+#inner {
+  width: 100px;
+  height: 100px;
+  background-color: coral;
+  margin: 0 auto;
+}
