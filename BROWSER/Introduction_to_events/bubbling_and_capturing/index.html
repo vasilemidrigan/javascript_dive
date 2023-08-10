@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- * -->
+    *
+    <div class="block" onclick="console.log('clicked')">
+      Lorem <code>ipsum</code> dolor sit amet.
+    </div>
+    **
+    <!-- ** -->
+    <div class="outer" onclick="console.log('outer clicked')">
+      outer
+      <div class="inner" onclick="console.log('inner clicked')">
+        inner
+        <div class="center" onclick="console.log('center clicked')">
+          center
+          <h1 onclick="console.log('header clicked')">deepest</h1>
+        </div>
+      </div>
+    </div>
+    ***
+    <!-- *** -->
+    <div class="outer" onclick="console.log('outer clicked')">
+      outer
+      <div class="inner">
+        inner
+        <div class="center">
+          center
+          <h1>deepest</h1>
+        </div>
+      </div>
+    </div>
+    ****
+    <!-- **** -->
+    <div class="outer" onclick="logThisAndTarget(event)">
+      outer
+      <div class="inner">
+        inner
+        <div class="center">
+          center
+          <h1>deepest</h1>
+        </div>
+      </div>
+    </div>
+    #
+    <!-- # -->
+    <div class="outer" onclick="console.log('clickeeeeeeeeeeed!')">
+      outer
+      <div class="inner" onclick="event.stopPropagation()">
+        inner
+        <div class="center">
+          center
+          <h1 ">deepest</h1>
+        </div>
+      </div>
+    </div>
+
+    ##
+    <!-- ## -->
+    <div class="outer" onclick="console.log('Parents event triggered')">
+      outer
+      <div id="inner" class="inner">
+        inner
+        <div class="center">
+          center
+          <h1 ">deepest</h1>
+        </div>
+      </div>
+    </div>
+
+    ###
+
+    <!-- ### -->
+    <div class="outer" onclick="console.log('Parents event triggered')">
+      outer
+      <div class="inner">
+        inner
+        <div id="center" class="center">
+          center
+          <h1 id="header">deepest</h1>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
+  </body>
+</html>

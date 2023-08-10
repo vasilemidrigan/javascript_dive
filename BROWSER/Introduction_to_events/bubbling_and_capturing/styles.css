@@ -1,0 +1,12 @@
+* {
+  border: 1px solid purple;
+  margin: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.outer {
+  margin-top: 50px;
+}
