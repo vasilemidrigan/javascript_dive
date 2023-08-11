@@ -105,3 +105,6 @@ Review Promises
 Review and understand promisification
 
 Practice generators and async generators more
+
+Finish dispatch events last two sections, and understand better how 
+dispatchEvent works
