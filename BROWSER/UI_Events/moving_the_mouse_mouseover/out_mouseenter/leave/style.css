@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: grey;
+}
+
+#inner,
+#outer,
+#parent,
+#child,
+#box_a,
+#box_b {
+  border: 1px solid black;
+  margin: 0 auto;
+}
+
+#outer,
+#parent,
+#box_a,
+#box_b {
+  width: 200px;
+  height: 200px;
+}
+
+#inner,
+#child {
+  width: 100px;
+  height: 100px;
+}
+
+#parent,
+#box_a,
+#box_b {
+  margin-top: 20px;
+}
+
+table,
+th,
+tr,
+td {
+  border: 1px solid black;
+}
+
+table {
+  width: 100%;
+  margin: 50px 0;
+}
+
+tr {
+  height: 50px;
+  text-align: center;
+}
+
+td {
+  cursor: pointer;
+}
