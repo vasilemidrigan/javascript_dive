@@ -127,28 +127,31 @@ let response = fetch(url, {
   POST requests
   -------------
 
-  To make a POST request, we usually use the method, and options, which is
-  usually a JSON. (*)
+  To make a POST request, or a request if another method,  we need to use 
+  fetch options. (*)
+
+  So, in fetch options we provide:
+  - method: POST or another
+  - body: one of(a string, FormData, Blob, BufferSource, URLSearchParams)
+
+  Usually, JSON format is used. 
+
+
 */
 
 // *
-let user = {
-  name: "John",
-  surname: "Smith",
-};
+let postURL = "https://jsonplaceholder.typicode.com/posts";
 
-async function postUser() {
-  let responseX = await fetch("/article/fetch/post/user", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-    body: JSON.stringify(user),
-  });
-
-  let result = await responseX.json();
-
-  console.log(result);
-}
-
-postUser();
+fetch(postURL, {
+  method: "POST",
+  body: JSON.stringify({
+    title: "foo",
+    body: "bar",
+    userId: 1,
+  }),
+  headers: {
+    "Content-Type": "application/json: charset=UTF-8",
+  },
+})
+  .then((response) => response.json())
+  .then((json) => console.log(json));
