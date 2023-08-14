@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.focused {
+  border: 1px solid blueviolet;
+}
+
+.invalid {
+  border-color: red;
+}
+
+#error {
+  color: red;
+}
