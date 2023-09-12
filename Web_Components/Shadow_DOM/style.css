@@ -1,3 +1,9 @@
 input::-webkit-slider-runnable-track {
   background: purple;
 }
+
+#text {
+  color: black;
+  text-align: center;
+  border: 1px solid grey;
+}
