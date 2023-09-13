@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <template>
+      <tr>
+        <td>content</td>
+      </tr>
+    </template>
+
+    <div>
+      <tr>
+        <td>content</td>
+      </tr>
+    </div>
+
+    <!-- * -->
+    <template id="tmpl">
+      <script>
+        console.log("template inserted");
+      </script>
+      <style>
+        .Bar {
+          border: 1px solid slateblue;
+          width: 100px;
+        }
+      </style>
+      <div class="Bar">
+        <hr id="line" />
+      </div>
+    </template>
+
+    <!-- ** -->
+
+    <div id="btn">click</div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
